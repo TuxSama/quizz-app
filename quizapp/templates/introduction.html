@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Introduction{% endblock %}
+
+  {% block content %}
+  <div class="big">
+      <div class="container1">
+              <img src="{% static 'resources/quizlogo.png' %}" alt="quizapp" width="256" height="256" />
+              <h1>Quizzy:</h1>
+              <p>
+                Une application de quiz construite avec <span class="django">django</span> est une application web
+                permettant aux utilisateurs de passer des quiz, de suivre leurs scores et de gérer les questions. L'application
+                propose une authentification des utilisateurs pour la connexion/inscription, ainsi qu'un système de notation
+                qui affiche les résultats après avoir complété un quiz.
+              </p>
+      </div>
+          <div class="container2">
+            <div>Cette application créée par:</div>
+            <div><span>Oussama</span> & <span>Dounia</span></div>
+            <div>En utilisant:</div>
+              <div class="tools1">
+                <img src="{% static 'resources/django.png' %}" alt="Django" width="90" height="90">
+                <img src="{% static 'resources/python.png' %}" alt="Python" width="80" height="80">
+              </div>
+              <div class="tools2">
+                <img src="{% static 'resources/html.png' %}" alt="HTML" width="80" height="80">
+                <img src="{% static 'resources/css.png' %}" alt="CSS" width="80" height="80">
+                <img src="{% static 'resources/sqlite.png' %}" alt="Sqlite" width="80" height="80">
+                <img src="{% static 'resources/js.png' %}" alt="Js" width="80" height="80">
+              </div>
+          </div> 
+  </div>
+  {% endblock %}
+
+  <footer>
+    <p>&copy; 2025 Quizzy. All rights reserved.</p>
+  </footer>
+
+
+

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="result-container">
+    <h1>{{ quiz.name }}</h1>
+        <div class="resulte-card">
+            <h1>Quiz Completed</h1>
+            <h2>Your Score: {{ score }}/{{ quiz_history|length }}</h2>
+            <h3>Your Answers:</h3>
+            <ul>
+                {% for item in quiz_history %}
+                    <li>
+                        <strong>Question:</strong> {{ item.question }}<br>
+                        <strong>Your Answer:</strong> {{ item.selected_answer }}<br>
+                        <strong>Correct Answer:</strong> {{ item.correct_answer }}
+                    </li>
+                {% endfor %}
+            </ul>
+            
+        </div></div>
+{% endblock %}

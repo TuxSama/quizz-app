@@ -1,0 +1,19 @@
+
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="profile-container">
+    <div class="profile-card">
+    <h2>Welcome {{ user.first_name }} {{ user.last_name }}!</h2>
+
+    <ul class="profile">
+       <li><strong class="info">Username:</strong> {{ user.username }}</li>
+       <li><strong class="info">Email:</strong> {{ user.email }}</li>
+       <li><strong class="info">First Name:</strong> {{ user.first_name }}</li>
+       <li><strong class="info">Last Name:</strong> {{ user.last_name }}</li>
+       <li><strong class="info">Date Joined:</strong> {{ user.date_joined }}</li>
+    </ul> 
+    </div>
+</div>
+
+{% endblock %}

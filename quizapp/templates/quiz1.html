@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="question-container">
+    <div class="question-card">
+    <h1>Quiz de geographie</h1>
+
+    <form method="POST" novalidate>
+        {% csrf_token %}
+
+        {# Display all form errors at the top in a single div #}
+        {% if form.errors %}
+            <div class="form-errors">choisir un reponse </div>
+        {% endif %} 
+        {# Loop through each form field without rendering inline errors #}
+        {% for field in form %}
+            <div>
+                <label class="qlabel" for="{{ field.id_for_label }}">{{ field.label }}</label>
+               {% if field.field.widget.input_type == 'radio' %}
+                    <div class="radio-group">
+                        {% for choice in field.field.choices %}
+                            <div class="radio">
+                                <input type="radio" id="{{ field.id_for_label }}_{{ forloop.counter }}" name="{{ field.name }}" value="{{ choice.0 }}" {% if choice.0 == field.value %}checked{% endif %}>
+                                <label for="{{ field.id_for_label }}_{{ forloop.counter }}">{{ choice.1 }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ field }}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn-primary">Next</button>
+    </form>
+{% endblock %}

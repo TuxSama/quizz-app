@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="quiz-container">
+    <div class="quiz-card">
+        <h1>Choisir un Quiz</h1>
+        <ul>
+        <a href="{% url 'quiz1' %}"><li class="quiz">Quize de geo</li></a>
+        <a href="{% url 'quiz1' %}"><li class="quiz">Quize de history</li></a>
+    </ul>
+    </div>
+</div>
+{% endblock %}
