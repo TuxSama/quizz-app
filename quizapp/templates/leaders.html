@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="quiz-container">
+    <div class="quiz-card">
+        <h1>Leaderboard</h1>
+        {% if leaderboard %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>High Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in leaderboard %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td> <!-- Rank -->
+                        <td>{{ entry.username }}</td> <!-- Username -->
+                        <td>{{ entry.high_score }}</td> <!-- High Score -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No scores available yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -340,6 +340,42 @@ footer p {
     color: #FF0000;
 
 }
+.quiz-card table {
+    width: 100%; 
+    
+    margin: 20px 0; 
+    font-size: 18px; 
+    text-align: left; 
+}
+
+.quiz-card th, td {
+    padding: 12px 15px; 
+    border-radius: 20px;
+   
+}
+
+.quiz-card th {
+    background-color: #289fF9; 
+    font-weight: bold;
+    text-transform: uppercase; 
+}
+
+.quiz-card tr:nth-child(even) {
+    background-color: #f2f2f2; 
+}
+
+.quiz-card tr:hover {
+    background-color: #f1f1f1; 
+}
+
+.quiz-card table tbody tr td {
+    text-align: center; 
+}
+
+.quiz-card table thead tr th {
+    text-align: center;
+}
+
 .question-card .qlabel{
     font-size: 2rem;
     font-weight: 800;

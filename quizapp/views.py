@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import AuthForm,SignUpForm
-from .models import Question1
-from .forms import QuizForm
+from .forms import AuthForm,SignUpForm,QuizForm
+from .models import Question1,Stock
+from django.db.models import Max  
+from django.contrib.auth.models import User
 def introduction(request):
     return render(request, "introduction.html")
 
@@ -55,12 +55,23 @@ def profile(request):
 def signout(request):
     logout(request)
     return redirect('signin')
-
 @login_required
+def leaders(request):
+    leaderboard = (
+        Stock.objects.values('user') 
+        .annotate(high_score=Max('score')) 
+        .order_by('-high_score')[:10] 
+    )
+
+    for entry in leaderboard:
+        user = User.objects.get(id=entry['user'])  # Fetch the User object
+        entry['username'] = user.username  # Add the username to the entry
+
+    return render(request, "leaders.html", {'leaderboard': leaderboard})
 def quiz1(request):
     questions = Question1.objects.all()
     current_index = request.session.get('current_question', 0)
-    history = request.session.get('quiz_history', []) 
+    history = request.session.get('quiz_history', [])
 
     if current_index < len(questions):
         question = questions[current_index]
@@ -71,18 +82,31 @@ def quiz1(request):
             if form.is_valid():
                 selected_answer = form.cleaned_data[f"answer_{question.id}"]
                 history.append({
-                    'question': question.question_text,  
+                    'question': question.question_text,
                     'selected_answer': selected_answer,
-                    'correct_answer': question.correct_answer, 
+                    'correct_answer': question.correct_answer,
                 })
-                request.session['quiz_history'] = history  
+                request.session['quiz_history'] = history
                 request.session['current_question'] = current_index + 1
                 return redirect('quiz1')
 
         return render(request, 'quiz1.html', {'form': form})
     else:
         request.session['current_question'] = 0
-        quiz_history = request.session.pop('quiz_history', [])  
+        quiz_history = request.session.pop('quiz_history', [])
         score = sum(1 for item in quiz_history if item['selected_answer'] == item['correct_answer'])
 
-        return render(request, 'quiz_completed.html', {'quiz_history': quiz_history, 'score': score})
+    
+        ticker = "QUIZ1"  
+        name = "Quiz 1"   
+        Stock.objects.create(
+            user=request.user,
+            ticker=ticker,
+            name=name,
+            score=score
+        )
+
+        return render(request, 'quiz_completed.html', {
+            'quiz_history': quiz_history,
+            'score': score
+        })

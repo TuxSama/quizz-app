@@ -15,7 +15,11 @@
                 <a href="/">Quizzy</a>
             </div>
             <ul class="nav-links">
-                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <li><a href="/admin/">Admin Dashboard</a></li>
+                    <li><a href="{% url 'profile'%}">Profile</a></li>
+                    <li><a href="{% url 'signout'%}">Sign out</a></li>
+                {% elif user.is_authenticated %}
                     <li><a href="{% url 'dashboard'%}">Dashboard</a></li>
                     <li><a href="{% url 'profile'%}">Profile</a></li>
                     <li><a href="{% url 'signout'%}">Sign out</a></li>
