@@ -3,7 +3,7 @@
 {% block content %}
 <div class="question-container">
     <div class="question-card">
-    <h1>Quiz de geographie</h1>
+    <h1>Question N:{{current_index}}</h1>
 
     <form method="POST" novalidate>
         {% csrf_token %}

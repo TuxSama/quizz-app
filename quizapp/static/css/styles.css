@@ -342,7 +342,7 @@ footer p {
 }
 .quiz-card table {
     width: 100%; 
-    
+    border-radius: 20px;
     margin: 20px 0; 
     font-size: 18px; 
     text-align: left; 
@@ -355,18 +355,18 @@ footer p {
 }
 
 .quiz-card th {
-    background-color: #289fF9; 
+    background-color: #4E39DFcf; 
     font-weight: bold;
     text-transform: uppercase; 
 }
-
+.quiz-card tr{
+    background-color: #289fF94f;
+}
 .quiz-card tr:nth-child(even) {
-    background-color: #f2f2f2; 
+    background-color: #289fF9cf; 
 }
 
-.quiz-card tr:hover {
-    background-color: #f1f1f1; 
-}
+
 
 .quiz-card table tbody tr td {
     text-align: center; 

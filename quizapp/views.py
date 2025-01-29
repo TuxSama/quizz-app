@@ -5,6 +5,7 @@ from .forms import AuthForm,SignUpForm,QuizForm
 from .models import Question1,Stock
 from django.db.models import Max  
 from django.contrib.auth.models import User
+
 def introduction(request):
     return render(request, "introduction.html")
 
@@ -48,13 +49,16 @@ def signin(request):
 @login_required
 def dashboard(request):
     return render(request, "dashboard.html")
+
 @login_required
 def profile(request):
      return render(request, "registration/profile.html",{'user': request.user})
+
 @login_required
 def signout(request):
     logout(request)
     return redirect('signin')
+
 @login_required
 def leaders(request):
     leaderboard = (
@@ -64,10 +68,12 @@ def leaders(request):
     )
 
     for entry in leaderboard:
-        user = User.objects.get(id=entry['user'])  # Fetch the User object
-        entry['username'] = user.username  # Add the username to the entry
+        user = User.objects.get(id=entry['user'])  
+        entry['username'] = user.username 
 
     return render(request, "leaders.html", {'leaderboard': leaderboard})
+
+
 def quiz1(request):
     questions = Question1.objects.all()
     current_index = request.session.get('current_question', 0)
@@ -90,7 +96,7 @@ def quiz1(request):
                 request.session['current_question'] = current_index + 1
                 return redirect('quiz1')
 
-        return render(request, 'quiz1.html', {'form': form})
+        return render(request, 'quiz1.html', {'form': form, 'current_index':current_index+1})
     else:
         request.session['current_question'] = 0
         quiz_history = request.session.pop('quiz_history', [])
