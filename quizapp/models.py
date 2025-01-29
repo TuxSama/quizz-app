@@ -21,7 +21,7 @@ class Stock(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ticker = models.CharField(max_length=10)
     name = models.CharField(max_length=255)
-    score = models.FloatField()
+    score = models.IntegerField()
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):

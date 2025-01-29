@@ -392,6 +392,8 @@ footer p {
 .radio, .radio label{
     width: 180px;
     height:80px;
+    font-size: larger;
+    font-weight: bold;
     color: #2575fc;
     background-color:#ffffff ;
     display: flex;
